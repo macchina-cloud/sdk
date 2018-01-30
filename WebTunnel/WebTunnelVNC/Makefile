@@ -14,6 +14,8 @@ tlslibs = PocoNetSSL PocoCrypto
 SYSLIBS += -lssl -lcrypto -lz -ldl
 endif
 
+INCLUDE += -I$(PROJECT_BASE)/include
+
 objects = WebTunnelVNC
 
 target         = WebTunnelVNC
