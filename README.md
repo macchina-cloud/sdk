@@ -45,7 +45,7 @@ The macchina.cloud SDK is licensed under the [Boost Software License](https://sp
 ## External Dependencies
 
 The macchina.cloud Device SDK requires OpenSSL 0.9.8 or newer.
-We recommend using at least OpenSSL 1.0.2.
+We recommend using at least OpenSSL 1.1.0.
 
 Most Unix/Linux systems already have OpenSSL preinstalled. If your system
 does not have OpenSSL, please get it from <http://www.openssl.org> or

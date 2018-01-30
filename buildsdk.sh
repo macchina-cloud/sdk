@@ -35,6 +35,15 @@ fi
 
 cd $SDK_BASE
 
+mkdir -p $SDK_BASE/bin
+
+function copy() {
+	appname=$(echo $1| cut -d'/' -f 2)
+	if [ -d $PROJECT_BASE/$appname/bin/ ] ; then
+		find $PROJECT_BASE/$appname/bin/ -type f -name $appname -exec cp '{}' $SDK_BASE/bin/ \;
+	fi
+}
+
 function build() {
 	app=$1
 	echo "Building: $app, target: $2"
@@ -43,6 +52,7 @@ function build() {
 		echo "SDK build failed."
 		exit 1
 	fi
+	copy $app
 }
 
 build WebTunnel static_release
