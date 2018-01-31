@@ -170,15 +170,15 @@ protected:
 		helpFormatter.setCommand(commandName());
 		helpFormatter.setUsage("OPTIONS");
 		helpFormatter.setHeader("\n"
-			"my-devices.net WebTunnel Agent.\n"
+			"macchina.cloud WebTunnel Agent.\n"
 			"Copyright (c) 2013-2017 by Applied Informatics Software Engineering GmbH.\n"
 			"All rights reserved.\n\n"
 			"This application is used to forward local TCP ports to remote\n"
-			"clients via the my-devices.net reflector server.\n\n"
+			"clients via the macchina.cloud reflector server.\n\n"
 			"The following command-line options are supported:");
 		helpFormatter.setFooter(
-			"For more information, please visit the my-devices.net "
-			"website at <http://www.my-devices.net>."
+			"For more information, please visit the macchina.cloud "
+			"website at <http://www.macchina.cloud>."
 		);
 		helpFormatter.setIndent(8);
 		helpFormatter.format(std::cout);

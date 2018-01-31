@@ -207,24 +207,24 @@ protected:
 		helpFormatter.setCommand(commandName());
 		helpFormatter.setUsage("OPTIONS <Remote-URI> [-- SSH-OPTIONS]");
 		helpFormatter.setHeader("\n"
-			"my-devices.net WebTunnel SSH Client.\n"
+			"macchina.cloud WebTunnel SSH Client.\n"
 			"Copyright (c) 2014-2017 by Applied Informatics Software Engineering GmbH.\n"
 			"All rights reserved.\n\n"
 			"This application is used to launch a SSH connection to a remote\n"
-			"host via the my-devices.net reflector server.\n\n"
+			"host via the macchina.cloud reflector server.\n\n"
 			"<Remote-URI> specifies the URI of the remote device via the\n"
 			"reflector server, e.g.:\n"
 #if defined(WEBTUNNEL_ENABLE_TLS)
-			"https://8ba57423-ec1a-4f31-992f-a66c240cbfa0.my-devices.net"
+			"https://8ba57423-ec1a-4f31-992f-a66c240cbfa0.macchina.cloud"
 #else
-			"http://8ba57423-ec1a-4f31-992f-a66c240cbfa0.my-devices.net"
+			"http://8ba57423-ec1a-4f31-992f-a66c240cbfa0.macchina.cloud"
 #endif
 			"\n\n"
 			"The following command-line options are supported:"
 		);
 		helpFormatter.setFooter(
-			"For more information, please visit the my-devices.net "
-			"website at <http://www.my-devices.net>."
+			"For more information, please visit the macchina.cloud "
+			"website at <http://www.macchina.cloud>."
 		);
 		helpFormatter.setIndent(8);
 		helpFormatter.format(std::cout);
@@ -248,12 +248,12 @@ protected:
 	{
 		if (_username.empty())
 		{
-			std::cout << "my-devices.net Username: " << std::flush;
+			std::cout << "macchina.cloud Username: " << std::flush;
 			std::getline(std::cin, _username);
 		}
 		if (_password.empty())
 		{
-			std::cout << "my-devices.net Password: " << std::flush;
+			std::cout << "macchina.cloud Password: " << std::flush;
 			echo(false);
 			std::getline(std::cin, _password);
 			echo(true);
