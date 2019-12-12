@@ -1,8 +1,6 @@
 #
 # Makefile
 #
-# $Id: //poco/1.7/WebTunnel/samples/WebTunnelAgent/Makefile#3 $
-#
 # Makefile for WebTunnelAgent
 #
 
@@ -13,6 +11,8 @@ CXXFLAGS += -DWEBTUNNEL_ENABLE_TLS
 tlslibs = PocoNetSSL PocoCrypto
 SYSLIBS += -lssl -lcrypto -lz -ldl
 endif
+
+INCLUDE += -I$(PROJECT_BASE)/include
 
 objects = WebTunnelAgent
 

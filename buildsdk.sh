@@ -2,9 +2,7 @@
 #
 # buildsdk.sh
 #
-# $Id: //poco/1.7/dist/my-devices-sdk/buildsdk.sh#1 $
-#
-# Build script for the my-devices.net Device SDK.
+# Build script for the macchina.cloud Device SDK.
 #
 
 PARALLEL_BUILDS=4
@@ -14,12 +12,17 @@ if [ "$1" != "" ] ; then
 	config="--config=$1"
 fi
 
-echo "Starting my-devices.net SDK build..."
+omit="--omit=Data,Data/SQLite,Data/ODBC,Data/MySQL,Data/PostgreSQL,Zip,PageCompiler,PDF,CppParser,MongoDB,Redis,PocoDoc,ProGen"
+echo "Starting macchina.cloud SDK build..."
 
-export POCO_BASE=`pwd`
+export SDK_BASE=`pwd`
+export POCO_BASE=$SDK_BASE/poco
+export PROJECT_BASE=$SDK_BASE/WebTunnel
 export POCO_CONFIG=$1
 
-./configure --cflags=-DPOCO_UTIL_NO_XMLCONFIGURATION --cflags=-DPOCO_UTIL_NO_JSONCONFIGURATION --no-tests --no-samples --static $config
+cd $POCO_BASE
+
+./configure --cflags=-DPOCO_UTIL_NO_XMLCONFIGURATION --cflags=-DPOCO_UTIL_NO_JSONCONFIGURATION --no-tests --no-samples --static $omit $config
 if [ $? -ne 0 ] ; then
 	echo "Configure script failed. Exiting."
 	exit 1
@@ -30,18 +33,34 @@ if [ $? -ne 0 ] ; then
 	exit 1
 fi
 
-mkdir -p bin
+cd $SDK_BASE
 
-for app in WebTunnelAgent WebTunnelClient WebTunnelSSH WebTunnelVNC; do
-	echo "Building: $app"
-	make -s DEFAULT_TARGET=shared_release -C WebTunnel/$app
+mkdir -p $SDK_BASE/bin
+
+function copy() {
+	appname=$(echo $1| cut -d'/' -f 2)
+	if [ -d $PROJECT_BASE/$appname/bin/ ] ; then
+		find $PROJECT_BASE/$appname/bin/ -type f -name $appname -exec cp '{}' $SDK_BASE/bin/ \;
+	fi
+}
+
+function build() {
+	app=$1
+	echo "Building: $app, target: $2"
+	make -s DEFAULT_TARGET=$2 -C $app
 	if [ $? -ne 0 ] ; then
 		echo "SDK build failed."
 		exit 1
 	fi
-	cp -R WebTunnel/$app/bin/* bin
+	copy $app
+}
+
+build WebTunnel static_release
+
+for app in WebTunnelAgent WebTunnelClient WebTunnelSSH WebTunnelVNC; do
+	build WebTunnel/$app shared_release
 done
 
 echo ""
-echo "my-devices.net SDK build is complete."
+echo "macchina.cloud SDK build is complete."
 echo ""
